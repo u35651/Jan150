@@ -1,0 +1,2545 @@
+name: CI User u35651
+ mkdir -p ~/.ssh
+
+  Host devcloud
+  chmod 600 ~/.ssh/config
+
+jobs:  my_project/opt/intel/inteloneapi/setvars.sh
+
+ cat > job.sh
+ #!/bin/bash
+
+source /opt/intel/inteloneapi/setvars.sh
+
+make run
+ qsub -l nodes=1:gpu:ppn=2 -d . job.c009.sh
+ touch [-option] [file-name]
+  mkdir [-option] [directory-name]
+  ln [-option] [file-name1] [file-name2]
+   grep [-option] [“pattern”] [file-name]
+
+ cd HPCKit-code-samples/matrix_mul/
+ echo lscpu | qsub
+ 520.login-1
+ $ cat STDIN.o520 | grep 'Model name'
+ Model name:            Intel® Xeon® Gold 6128 CPU @ 3.40GHz
+ echo ~/my_first_project/myexecutable | qsub
+ [u35651@login-1 my_first_project]$ cat launch
+ #PBS -N my_project_1
+ cd ~/my_first_project
+ echo Starting calculation
+ ./myexecutable
+ echo End of calculation
+   cat > job.sh
+  #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make run
+ qsub -l nodes=1:gpu:ppn=2 -d . job.sh
+ qsub -I -l nodes=1:gpu:ppn=2 -d 
+ bash job.sh
+ echo
+ echo start: $(date "+%y%m%d.%H%M%S.%3N")
+ echo
+ [u35651@login-1 my_first_project]$ qsub launch
+ 523.login-1
+ # TODO list
+
+ echo
+ echo stop:  $(date "+%y%m%d.%H%M%S.%3N")
+ echo
+ qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_hw.sh
+ qsub -l nodes=1:fpga_runtime:ppn=2 -d . run_fpga_hw.sh -W depend=afterok:XXXX
+ qsub […] -l walltime=hh:mm:ss
+ watch -n 1 qstat -n -1
+ qdel <job_id>
+ qsub -I […]
+ qsub […] -l nodes=1:[property]:ppn=2
+ qsub […] -l nodes=[node_name]:ppn=2
+ pbsnodes
+ pbsnodes -l free
+ scp file devcloud:~/
+ scp devcloud:~/file .
+ build:git clone https://github.com/intel/BaseKit-code-samples.git
+   cd BaseKit-code-samples/DPC++Compiler/vector-add/
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make clean
+ make all
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make run
+ qsub -l nodes=1:gpu:ppn=2 -d . build.c009.sh
+ watch -n 1 qstat -n -1
+ qsub -l nodes=1:gpu:ppn=2 -d . run.c009.sh
+ <script_name>.sh.u35651, which is the job stderr
+ <script_name>.sh.u35651, which is the job stdout
+ cat run.sh.u35651
+ qstat-s batch@v-qscr-nda
+
+     runs-on: ubuntu-latest
+
+     steps:
+     - uses: actions/checkout@v1
+     - name: Run a one-line script
+       run: echo Hello, world!
+     - name: Run a multi-line script
+       run: rm build.sh.*; rm run.sh.*; 
+         echo Add other actions to build,
+         echo test, and deploy your project.
+         qsub -I -l nodes=1:gpu:ppn=2 -d. run.c009.sh
+         make all && make run
+         build_fpga_emu.sh
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make fpga_emu -f Makefile.fpga
+ run_fpga_emu.sh
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make run_emu -f Makefile.fpga
+ qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_emu.sh
+ qsub -l nodes=1:fpga_compile:ppn=2 -d . run_fpga_emu.sh
+ build_fpga_hw.sh
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make hw -f Makefile.fpga
+ run_fpga_hw.sh
+ #!/bin/bash
+ source /opt/intel/inteloneapi/setvars.sh
+ make run_hw -f Makefile.fpga
+ qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_hw.sh
+ qsub -l nodes=1:fpga_runtime:ppn=2 -d . run_fpga_hw.sh
+ [u35651@login-1 ~]$ qstat
+ Job ID                    Name             User            Time Use S Queue
+ ------------------------- ---------------- --------------- -------- - -----
+ 551.login-1                   my1stjob         u35651             00:00:00 R batch          
+ 552.login-1                   my2ndjob         u35651             00:00:00 R batch          
+ 557.login-1                   mylargejob       u35651                    0 Q batch 
+ [u35651@login-1 ~]$ qstat -f 557
+ Job Id: 557.login-1
+     Job_Name = mylargejob
+     Job_Owner = u35651@login-1
+     job_state = Q
+     ...
+     Resource_List.nodect = 36
+     Resource_List.nodes = 36
+     Resource_List.walltime = 00:10:00
+     ... 
+     [u35651@login-1 ~]$ qstat
+ Job ID                    Name             User            Time Use S Queue
+ ------------------------- ---------------- --------------- -------- - -----
+ 549.login-1                   badrun           u35651                    0 R batch          
+ 550.login-1                   goodrun          u35651                    0 R batch
+
+ [u35651@login-1 ~]$ qdel 549
+ [u35651@login-1 ~]$ qdel all
+ [u35651@login-1 ~]$ echo nosuchcommand 2>&1 | qsub -o ./custom_log.txt
+ [u35651@login-1 ~] cat my_command_file
+ #PBS -e ./custom_log.txt
+ nosuchcommand 2>&1
+ [u35651@login-1 ~] qsub my_command_file 
+ -o <path_to_stdout_file>
+ -e <path_to_stderr_file>
+ [u35651@login-1 ~]$ echo date | qsub -o ./my_log_output.txt -e ./my_log_errors.txt
+ -N <job_name>
+  [u35651@login-1 ~]$ echo date | qsub -N my_test_job
+  -d <path_to_working_directory>
+   [u35651@login-1 ~]$ echo pwd | qsub -d ~/my_first_project
+ -l walltime=<time> 
+   [u35651@login-1 ~]$ qmgr -c "list queue batch"
+   [u35651@login-1 ~]$ echo sleep 1000 | qsub -l walltime=00:30:00
+   -l nodes=<count>:ppn=2
+    [u35651@login-1 ~]$ echo cat \$PBS_NODEFILE | qsub -l nodes=4:ppn=2
+    -F "arg1 arg2 ..."
+     [u35651@login-1 ~]$ cat myjob
+ cd $PBS_O_WORKDIR
+ ./myexecutable $1
+ [u35651@login-1 ~]$ qsub myjob -F "13.2"
+ [u35651@login-1 ~]$ qsub myjob -F "86.0"
+ chmod [reference] [operator] [permissions] [file-name]
+ chown [-option] [new-owner:new-group] [file-name] 
+ man [-option] [command name]
+ rm build.sh.*; rm run.sh.*;
+   </Link>
+   </ItemDefinitionGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+    <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+         <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+        </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+       <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+          <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+      </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+   <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\matrix_mul_dpcpp.cpp" />
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{d41bafbf-46e8-4bf6-ac99-5a311221e7c5}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>matrix_mul_dpcpp</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+     <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+     <Filter Include="Source Files">
+       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+     </Filter>
+     <Filter Include="Header Files">
+       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+     </Filter>
+     <Filter Include="Resource Files">
+       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\matrix_mul_dpcpp.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+   </ItemGroup>
+   </Project>
+   <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup />
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\matrix_mul_mkl.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{f8b26a6e-0121-4f4c-8fa9-9784852574c3}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>matrix_mul_mkl</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+       <AdditionalIncludeDirectories>$(ONEAPI_ROOT)\mkl\latest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+       <AdditionalDependencies>
+       </AdditionalDependencies>
+       <AdditionalOptions>/link /libpath:"$(ONEAPI_ROOT)\mkl\latest\lib\intel64" mkl_intel_ilp64.lib mkl_sequential.lib mkl_core.lib mkl_sycl.lib opencl.lib %(AdditionalOptions)</AdditionalOptions>
+       <SYCLShowVerboseInformation>false</SYCLShowVerboseInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+       <AdditionalIncludeDirectories>$(ONEAPI_ROOT)\mkl\latest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+       <AdditionalDependencies>
+       </AdditionalDependencies>
+       <AdditionalOptions>/link /libpath:"$(ONEAPI_ROOT)\mkl\latest\lib\intel64" mkl_intel_ilp64.lib mkl_sequential.lib mkl_core.lib mkl_sycl.lib opencl.lib %(AdditionalOptions)</AdditionalOptions>
+       <SYCLShowVerboseInformation>false</SYCLShowVerboseInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+     <Filter Include="Source Files">
+       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+     </Filter>
+     <Filter Include="Header Files">
+       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+     </Filter>
+     <Filter Include="Resource Files">
+       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\matrix_mul_mkl.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup />
+ </Project>
+ {
+   "name": "Matrix Multiplication",
+   "categories": [ "Toolkit/Get Started", "Toolkit/Intel® oneAPI HPC Toolkit" ],
+   "toolchain": [ "dpcpp", "icc" ],
+   "dependencies": [ "mkl" ],
+   "description": "Simple program that multiplies two large matrices in parallel using DPC++, OpenMP and MKL.",
+   "languages": [ { "cpp": { "properties": { "projectOptions": [ { "projectType": "makefile" } ] } } } ],
+   "targetDevice": [ "CPU", "GPU" ],
+   "os": [ "linux", "windows" ],
+   "builder": [ "ide", "make" ]
+ }
+
+     runs-on: ubuntu-latest
+
+     steps:
+     - uses: actions/checkout@v1
+     - name: Run a one-line script
+       run: echo Hello, world!
+     - name: Run a multi-line script
+       run: run_fpga_emu.sh
+         echo Add other actions to build,
+         echo test, and deploy your project.
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+     <Filter Include="Source Files">
+       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+     </Filter>
+     <Filter Include="Header Files">
+       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+     </Filter>
+     <Filter Include="Resource Files">
+       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\motionsim.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="readme.md" />
+   </ItemGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LocalDebuggerCommandArguments>1000</LocalDebuggerCommandArguments>
+     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+     <LocalDebuggerEnvironment>SYCL_DEVICE_TYPE=GPU
+ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LocalDebuggerCommandArguments>1000</LocalDebuggerCommandArguments>
+     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+     <LocalDebuggerEnvironment>SYCL_DEVICE_TYPE=GPU
+ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+   </PropertyGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{9a9aad41-d608-401f-9339-fecf2c3cd8e4}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>Particle_Diffusion</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemGroup>
+     <ClCompile Include="src\motionsim.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="readme.md" />
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+ </Project>
+ Microsoft Visual Studio Solution File, Format Version 12.00
+ # Visual Studio 15
+ VisualStudioVersion = 15.0.28307.852
+ MinimumVisualStudioVersion = 10.0.40219.1
+ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nbody", "Nbody.vcxproj", "{E920E262-9E0C-459A-A8F9-61B2AE194CF7}"
+ EndProject
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\GSimulation.cpp" />
+     <ClCompile Include="src\main.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="src\cpu_time.hpp" />
+     <ClInclude Include="src\GSimulation.hpp" />
+     <ClInclude Include="src\Particle.hpp" />
+     <ClInclude Include="src\type.hpp" />
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="readme.md" />
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{e920e262-9e0c-459a-a8f9-61b2ae194cf7}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>Nbody</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+     <Filter Include="Source Files">
+       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+     </Filter>
+     <Filter Include="Header Files">
+       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+     </Filter>
+     <Filter Include="Resource Files">
+       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\GSimulation.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+     <ClCompile Include="src\main.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="src\cpu_time.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\GSimulation.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\Particle.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\type.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="readme.md" />
+   </ItemGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LocalDebuggerEnvironment>$(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+   </PropertyGroup>
+ </Project>
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup>
+     <Filter Include="Source Files">
+       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+     </Filter>
+     <Filter Include="Header Files">
+       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+     </Filter>
+     <Filter Include="Resource Files">
+       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\GSimulation.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+     <ClCompile Include="src\main.cpp">
+       <Filter>Source Files</Filter>
+     </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="src\cpu_time.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\GSimulation.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\Particle.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+     <ClInclude Include="src\type.hpp">
+       <Filter>Header Files</Filter>
+     </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="readme.md" />
+   </ItemGroup>
+ </Project>
+ # CMakeLists.txt for ISO3DFD_OMP_OFFLOAD project
+ cmake_minimum_required (VERSION 3.0)
+ set(CMAKE_CXX_COMPILER "icpc")
+ project (iso3dfd_omp_offload)
+ add_subdirectory (src)
+ #include "GSimulation.hpp"
+ #include "cpu_time.hpp"
+
+ GSimulation :: GSimulation()
+ {
+   std::cout << "===============================" << std::endl;
+   std::cout << " Initialize Gravity Simulation" << std::endl;
+   set_npart(16000); 
+   set_nsteps(10);
+   set_tstep(0.1); 
+   set_sfreq(1);
+ }
+
+ void GSimulation :: set_number_of_particles(int N)  
+ {
+   set_npart(N);
+ }
+
+ void GSimulation :: set_number_of_steps(int N)  
+ {
+   set_nsteps(N);
+ }
+
+ void GSimulation :: init_pos()  
+ {
+   std::random_device rd;	//random number generator
+   std::mt19937 gen(42);      
+   std::uniform_real_distribution<real_type> unif_d(0,1.0);
+
+   for(int i=0; i<get_npart(); ++i)
+   {
+     particles[i].pos[0] = unif_d(gen);
+     particles[i].pos[1] = unif_d(gen);
+     particles[i].pos[2] = unif_d(gen);
+   }
+ }
+
+ void GSimulation :: init_vel()  
+ {
+   std::random_device rd;        //random number generator
+   std::mt19937 gen(42);
+   std::uniform_real_distribution<real_type> unif_d(-1.0,1.0);
+
+   for(int i=0; i<get_npart(); ++i)
+   {
+     particles[i].vel[0] = unif_d(gen) * 1.0e-3f;
+     particles[i].vel[1] = unif_d(gen) * 1.0e-3f;
+     particles[i].vel[2] = unif_d(gen) * 1.0e-3f; 
+   }
+ }
+
+ void GSimulation :: init_acc() 
+ {
+   for(int i=0; i<get_npart(); ++i)
+   {
+     particles[i].acc[0] = 0.f; 
+     particles[i].acc[1] = 0.f;
+     particles[i].acc[2] = 0.f;
+   }
+ }
+
+ void GSimulation :: init_mass() 
+ {
+   real_type n   = static_cast<real_type> (get_npart());
+   std::random_device rd;        //random number generator
+   std::mt19937 gen(42);
+   std::uniform_real_distribution<real_type> unif_d(0.0,1.0);
+
+   for(int i=0; i<get_npart(); ++i)
+   {
+     particles[i].mass = n * unif_d(gen); 
+   }
+ }
+
+ void GSimulation :: start() 
+ {
+   real_type energy;
+   real_type dt = get_tstep();
+   int n = get_npart();
+   int i,j;
+
+   //allocate particles
+   particles = new Particle[n];
+
+   init_pos();	
+   init_vel();
+   init_acc();
+   init_mass();
+
+   print_header();
+
+   _totTime = 0.; 
+
+   const double softeningSquared = 1e-3;
+   // prevents explosion in the case the particles are really close to each other 
+   const double G = 6.67259e-11;
+
+   CPUTime time;
+   double ts0 = 0;
+   double ts1 = 0;
+   double nd = double(n);
+   double gflops = 1e-9 * ( (11. + 18. ) * nd*nd  +  nd * 19. );
+   double av=0.0, dev=0.0;
+   int nf = 0;
+
+   const double t0 = time.start();
+   for (int s=1; s<=get_nsteps(); ++s)
+   {   
+     ts0 += time.start(); 
+     for (i = 0; i < n; i++)// update acceleration
+     {
+       for (j = 0; j < n; j++)
+       {
+ %%writefile lab/simple-vector-incr.cpp
+ //==============================================================
+ // Copyright © 2019 Intel Corporation
+ //
+ // SPDX-License-Identifier: MIT
+ // =============================================================
+
+ // ### Step 1 - Inspect
+ // The code presents one input buffer (vector1) for which Sycl buffer memory is allocated.  
+ // The associated with vector1_accessor set to read/write gets the contents of the buffer.
+
+ #include <CL/sycl.hpp>
+ using namespace cl::sycl;
+ static const size_t N = 2;
+ int main() {
+         default_selector my_selector;
+         queue my_queue(my_selector);
+         std::cout << "Device : " << my_queue.get_device().get_info<info::device::name>() << std::endl;
+         int vector1[N] = {10,10};
+         std::cout << "Input  : " << vector1[0] << ", " << vector1[1] << std::endl;
+
+         // ### Step 2 - Add another input vector - vector2
+         // Uncomment the following line to add input vector2
+         // int vector2[N] = {20,20};
+
+         // ### Step 3 - Print out for vector2
+         // Uncomment the following line
+         // std::cout << "Input  : " << vector2[0] << ", " << vector2[1] << std::endl;
+         buffer<int, 1> vector1_buffer(vector1, range<1>(N));
+
+         // ### Step 4 - Add another Sycl buffer - vector2_buffer
+         // Uncomment the following line
+         // buffer<int, 1> vector2_buffer(vector2, range<1>(N));
+         my_queue.submit([&] (handler &my_handler){
+                 auto vector1_accessor = vector1_buffer.get_access<access::mode::read_write>(my_handler);
+
+         // Step 5 - add an accessor for vector2_buffer
+         // Look in the source code for the comment
+         // auto vector2_accessor = vector2_buffer.template get_access < access::mode::read > (my_handler);
+
+                 my_handler.parallel_for<class test>(range<1>(N), [=](id<1> index) {
+                         // ### Step 6 - Replace the existing vector1_accessor to accumulate vector2_accessor   
+                         // Comment the line: vector1_accessor[index] += 1;
+                         vector1_accessor[index] += 1;
+
+                         // Uncomment the following line
+                         // vector1_accessor[index] += vector2_accessor[index];
+                 });
+         });
+         my_queue.wait_and_throw();
+         vector1_buffer.get_access<access::mode::read>();
+         std::cout << "Output : " << vector1[0] << ", " << vector1[1] << std::endl;
+ }
+ %%writefile src/matrix_mul_mkl.cpp
+ //==============================================================
+ // Copyright © 2019 Intel Corporation
+ //
+ // SPDX-License-Identifier: MIT
+ // =============================================================
+
+ #include <iostream>
+ #include <CL/sycl.hpp>
+ #include "mkl_blas_sycl.hpp"
+ #include "mkl.h"
+
+ using namespace std;
+ using namespace cl::sycl;
+
+ // Matrix size constants
+ #define SIZE     4800   // Must be a multiple of 8.
+ #define M        SIZE/8
+ #define N        SIZE/4
+ #define P        SIZE/2
+ #define ESP       1.0E-06
+
+ /**
+  * Perform the matrix multiplication on host to verify results from mkl. 
+  */
+ int VerifyResult(double *c_back);
+
+ // ######################################################################
+ // main entry point 
+ // 
+ int main() {
+
+     //
+     // Initialize data for Gemm
+     //
+     // C = alpha * op(A) * op(B)  + beta * C 
+     //
+
+     mkl::transpose transA = mkl::transpose::nontrans;
+     mkl::transpose transB = mkl::transpose::nontrans;
+
+     // matrix data sizes
+     int m = M;
+     int n = P; 
+     int k = N;
+
+     // leading dimensions of data
+     int ldA = m;
+     int ldB = k;
+     int ldC = m;
+
+     // set scalar fp values     
+     double alpha = 1.0; 
+     double beta  = 0.0;
+
+     // 1D arrays on host side
+     double *A;
+     double *B;
+     double *C;
+
+     A = new double[M*N];
+     B = new double[N*P];
+     C = new double[M*P];
+
+     // prepare matrix data
+     int i, j;
+     // A is identity matrix
+     for (i=0; i<M; i++)
+         for (j=0; j<N; j++)
+             A[i*N + j] = 1.2;
+
+     // B is identity matrix
+     for (i=0; i<N; i++)
+         for (j=0; j<P; j++)
+             B[i*P + j] = 1.3;
+
+     cout << "Problem size: c(" << M << "," << P << ") = a(" << M << "," << N << ") * b(" << N << "," << P << ")" << std::endl;
+
+     // ######################################################################
+     // Step 1 - Execute GEMM - Computes a matrix-matrix product with general matrices.
+     // 
+
+     try {
+         // ######################################################################
+         // Step 2 - Initializing the devices queue with the default selector
+         // The device queue is used to enqueue the kernels and encapsulates
+         // all the states needed for execution 
+
+         default_selector device_selector;
+         queue device_queue(device_selector);
+
+         std::cout << "Device: "
+             << device_queue.get_device().get_info<info::device::name>()
+             << std::endl;
+         // Creating 1D buffers for matrices which are bound to host memory array
+         buffer<double, 1> a{A, range<1>{M*N}};
+         buffer<double, 1> b{B, range<1>{N*P}};
+         buffer<double, 1> c{C, range<1>{M*P}};
+         // ######################################################################
+         // Step 3 - execution of GEMM whereby a device_queue is passed into 
+         
+         mkl::blas::gemm(device_queue, transA, transB, m, n, k, alpha, a, ldA, b, ldB, beta, c, ldC);
+     }
+     catch(cl::sycl::exception const& e) {
+         std::cout << "\t\tSYCL exception during GEMM\n"
+             << e.what() << std::endl << "OpenCL status: " << e.get_cl_code() << std::endl;
+     }
+     int result; 
+     result = VerifyResult(C);
+     delete[] A;
+     delete[] B;
+     delete[] C;
+     return result;
+ }
+ int VerifyResult(double *c_back) {
+     // Check that the results are correct by comparing with host computing
+     int i, j, k;
+     // 2D arrays on host side
+     double (*a_host)[N];
+     double (*b_host)[P];
+     double (*c_host)[P];
+     a_host = new double[M][N];
+     b_host = new double[N][P];
+     c_host = new double[M][P];
+     
+     // a_host is identity matrix
+     for (i=0; i<M; i++)
+         for (j=0; j<N; j++)
+             a_host[i][j] = 1.2;
+     // b_host is identity matrix
+     for (i=0; i<N; i++)
+         for (j=0; j<P; j++)
+             b_host[i][j] = 1.3;
+     // c_host is initialized to zero
+     for (i=0; i<M; i++)
+         for (j=0; j<P; j++)
+             c_host[i][j] = 0;
+     
+     for (i=0; i<M; i++) {
+         for (k=0; k<N; k++) {
+             for (j=0; j<P; j++) {
+                 c_host[i][j] += a_host[i][k]  * b_host[k][j];
+             }
+             
+         }
+     }
+     bool MismatchFound = false;
+     //compare host side results with the result buffer from device side
+     for (i=0; i < M; i++) {
+         for (j=0; j < P; j++) {
+              
+             if (abs(c_back[i*P + j] - c_host[i][j])>ESP) {
+                 cout << "fail - The result is incorrect for element: [" << i << ", " << j
+                 << "], expected: " << c_host[i][j] << " , but got: " << c_back[i*P + j]
+                 << std::endl;
+                 MismatchFound = true;
+             }
+         }
+     }
+
+     cout << c_host[0][0] << c_back[0] << std::endl;
+     delete[] a_host;
+     delete[] b_host;
+     delete[] c_host;
+
+
+     if (!MismatchFound) {
+         cout << "success - The results are correct!" << std::endl;
+         return 0;
+     }
+     else {
+         cout << "fail - The results mis-match!" << std::endl;
+         return -1;
+     }
+
+ }
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\main.cpp" />
+     <ClCompile Include="src\mandelSerial.cpp" />
+     <ClCompile Include="src\syclObject.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="src\mandelParallel.h" />
+     <ClInclude Include="src\mandelSerial.h" />
+     <ClInclude Include="src\syclObject.h" />
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{c2df6f42-60a8-4ffd-ae40-f37e9ef9875e}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>mandelbrot</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>Level3</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+       <AdditionalDependencies>OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>Level3</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+       <AdditionalDependencies>OpenCL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+     </Link>
+   </ItemDefinitionGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+ </Project>
+ /**
+ * Copyright 2018, 2019 IBM Corp. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+ using System;
+ using System.Collections;
+ using System.Collections.Generic;
+ using System.IO;
+ using IBM.Cloud.SDK;
+ using IBM.Cloud.SDK.Authentication;
+ using IBM.Cloud.SDK.Utilities;
+ using IBM.Watson.VisualRecognition.V3;
+ using IBM.Watson.VisualRecognition.V3.Model;
+ using NUnit.Framework;
+ using UnityEngine;
+ using UnityEngine.TestTools;
+
+ namespace IBM.Watson.Tests
+ {
+     public class VisualRecognitionV3IntegrationTests
+     {
+         private VisualRecognitionService service;
+         private string versionDate = "2019-02-13";
+         private string giraffePositiveExamplesFilepath;
+         private string turtlePositiveExamplesFilepath;
+         private string negativeExamplesFilepath;
+         private string giraffeImageFilepath;
+         private string turtleImageFilepath;
+         private string turtleImageContentType = "image/jpeg";
+         private string obamaImageFilepath;
+         private string imageMetadataFilepath;
+         private string classifierName = "unity-sdk-classifier-safe-to-delete";
+         private string classifierId;
+         private bool isClassifierReady = false;
+
+         [OneTimeSetUp]
+         public void OneTimeSetup()
+         {
+             LogSystem.InstallDefaultReactors();
+
+             giraffePositiveExamplesFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/giraffe_positive_examples.zip";
+             turtlePositiveExamplesFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/turtle_positive_examples.zip";
+             negativeExamplesFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/negative_examples.zip";
+             giraffeImageFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/giraffe_to_classify.jpg";
+             turtleImageFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/turtle_to_classify.jpg";
+             obamaImageFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/obama.jpg";
+             imageMetadataFilepath = Application.dataPath + "/Watson/Tests/TestData/VisualRecognitionV3/imageMetadata.json";
+         }
+
+         [UnitySetUp]
+         public IEnumerator UnityTestSetup()
+         {
+             if (service == null)
+             {
+                 service = new VisualRecognitionService(versionDate);
+             }
+
+             while (!service.Authenticator.CanAuthenticate())
+                 yield return null;
+         }
+
+         [SetUp]
+         public void TestSetup()
+         {
+             service.WithHeader("X-Watson-Test", "1");
+         }
+
+         #region CreateClassifier
+         //[UnityTest, Order(0)]
+         public IEnumerator TestCreateClassifier()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to CreateClassifier...");
+             Classifier createClassifierResponse = null;
+             using (FileStream fs0 = File.OpenRead(giraffePositiveExamplesFilepath))
+             {
+                 using (FileStream fs1 = File.OpenRead(negativeExamplesFilepath))
+                 {
+                     using (MemoryStream ms0 = new MemoryStream())
+                     {
+                         using (MemoryStream ms1 = new MemoryStream())
+                         {
+                             fs0.CopyTo(ms0);
+                             fs1.CopyTo(ms1);
+                             Dictionary<string, MemoryStream> positiveExamples = new Dictionary<string, MemoryStream>();
+                             positiveExamples.Add("giraffe", ms0);
+                             service.CreateClassifier(
+                                 callback: (DetailedResponse<Classifier> response, IBMError error) =>
+                                 {
+                                     Log.Debug("VisualRecognitionServiceV3IntegrationTests", "CreateClassifier result: {0}", response.Response);
+                                     createClassifierResponse = response.Result;
+                                     classifierId = createClassifierResponse.ClassifierId;
+                                     Assert.IsNotNull(createClassifierResponse);
+                                     Assert.IsNotNull(classifierId);
+                                     Assert.IsTrue(createClassifierResponse.Name == classifierName);
+                                     Assert.IsNotNull(createClassifierResponse.Classes);
+                                     Assert.IsTrue(createClassifierResponse.Classes.Count > 0);
+                                     Assert.IsTrue(createClassifierResponse.Classes[0]._Class == "giraffe");
+                                     Assert.IsNull(error);
+                                 },
+                                 name: classifierName,
+                                 positiveExamples: positiveExamples,
+                                 negativeExamples: ms1,
+                                 negativeExamplesFilename: Path.GetFileName(negativeExamplesFilepath)
+                             );
+
+                             while (createClassifierResponse == null)
+                                 yield return null;
+                         }
+                     }
+                 }
+             }
+         }
+         #endregion
+
+         #region Classify
+         [UnityTest, Order(1)]
+         public IEnumerator TestClassify()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to Classify...");
+             ClassifiedImages classifyResponse = null;
+             using (FileStream fs = File.OpenRead(turtleImageFilepath))
+             {
+                 using (MemoryStream ms = new MemoryStream())
+                 {
+                     fs.CopyTo(ms);
+                     service.Classify(
+                     callback: (DetailedResponse<ClassifiedImages> response, IBMError error) =>
+                     {
+                         Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Classify result: {0}", response.Response);
+                         classifyResponse = response.Result;
+                         Assert.IsNotNull(classifyResponse);
+                         Assert.IsNotNull(classifyResponse.Images);
+                         Assert.IsTrue(classifyResponse.Images.Count > 0);
+                         Assert.IsNotNull(classifyResponse.Images[0].Classifiers);
+                         Assert.IsTrue(classifyResponse.Images[0].Classifiers.Count > 0);
+                         Assert.IsNull(error);
+                     },
+                     imagesFile: ms,
+                     imagesFileContentType: turtleImageContentType,
+                     imagesFilename: Path.GetFileName(turtleImageFilepath)
+                 );
+
+                     while (classifyResponse == null)
+                         yield return null;
+                 }
+             }
+         }
+         #endregion
+
+         #region GetClassifier
+         //[UnityTest, Order(3)]
+         public IEnumerator TestGetClassifier()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to GetClassifier...");
+             Classifier getClassifierResponse = null;
+             service.GetClassifier(
+                 callback: (DetailedResponse<Classifier> response, IBMError error) =>
+                 {
+                     Log.Debug("VisualRecognitionServiceV3IntegrationTests", "GetClassifier result: {0}", response.Response);
+                     getClassifierResponse = response.Result;
+                     Assert.IsNotNull(getClassifierResponse);
+                     Assert.IsTrue(getClassifierResponse.ClassifierId == classifierId);
+                     Assert.IsNull(error);
+                 },
+                 classifierId: classifierId
+             );
+
+             while (getClassifierResponse == null)
+                 yield return null;
+         }
+         #endregion
+
+         #region ListClassifiers
+         [UnityTest, Order(4)]
+         public IEnumerator TestListClassifiers()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to ListClassifiers...");
+             Classifiers listClassifiersResponse = null;
+             service.ListClassifiers(
+                 callback: (DetailedResponse<Classifiers> response, IBMError error) =>
+                 {
+                     Log.Debug("VisualRecognitionServiceV3IntegrationTests", "ListClassifiers result: {0}", response.Response);
+                     listClassifiersResponse = response.Result;
+                     Assert.IsNotNull(listClassifiersResponse);
+                     Assert.IsNotNull(listClassifiersResponse._Classifiers);
+                     Assert.IsTrue(listClassifiersResponse._Classifiers.Count > 0);
+                     Assert.IsNull(error);
+                 },
+                 verbose: true
+             );
+
+             while (listClassifiersResponse == null)
+                 yield return null;
+         }
+         #endregion
+
+         #region WaitForClassifier
+         //[UnityTest, Order(5)]
+         [Timeout(int.MaxValue)]
+         public IEnumerator WaitForClassifier()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to WaitForClassifier...");
+             isClassifierReady = false;
+             Runnable.Run(CheckClassifierStatus());
+
+             while (!isClassifierReady)
+                 yield return null;
+         }
+         #endregion
+
+         #region UpdateClassifier
+         //[UnityTest, Order(6)]
+         public IEnumerator TestUpdateClassifier()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to UpdateClassifier...");
+             using (FileStream fs = File.OpenRead(turtlePositiveExamplesFilepath))
+             {
+                 using (MemoryStream ms = new MemoryStream())
+                 {
+                     fs.CopyTo(ms);
+                     Classifier updateClassifierResponse = null;
+                     Dictionary<string, MemoryStream> positiveExamples = new Dictionary<string, MemoryStream>();
+                     positiveExamples.Add("turtles_positive_examples", ms);
+                     service.UpdateClassifier(
+                         callback: (DetailedResponse<Classifier> response, IBMError error) =>
+                         {
+                             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "UpdateClassifier result: {0}", response.Response);
+                             updateClassifierResponse = response.Result;
+                             Assert.IsNotNull(updateClassifierResponse);
+                             Assert.IsNotNull(updateClassifierResponse.Classes);
+                             Assert.IsTrue(updateClassifierResponse.Classes.Count > 0);
+                             Assert.IsNull(error);
+                         },
+                         classifierId: classifierId,
+                         positiveExamples: positiveExamples
+                     );
+
+                     while (updateClassifierResponse == null)
+                         yield return null;
+                 }
+             }
+         }
+         #endregion
+
+         #region WaitForClassifier
+         //[UnityTest, Order(7)]
+         [Timeout(int.MaxValue)]
+         public IEnumerator WaitForClassifier2()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to WaitForClassifier2...");
+             isClassifierReady = false;
+             Runnable.Run(CheckClassifierStatus());
+
+             while (!isClassifierReady)
+                 yield return null;
+         }
+         #endregion
+
+         #region GetCoreMlModel
+         //[UnityTest, Order(8)]
+         public IEnumerator TestGetCoreMlModel()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to GetCoreMlModel...");
+             byte[] getCoreMlModelResponse = null;
+             service.GetCoreMlModel(
+                 callback: (DetailedResponse<byte[]> response, IBMError error) =>
+                 {
+                     getCoreMlModelResponse = response.Result;
+                     Assert.IsNotNull(getCoreMlModelResponse);
+                     Assert.IsNull(error);
+
+                     //  Save file
+                     using (FileStream fs = File.Create(Application.dataPath + "/myModel.mlmodel"))
+                     {
+                         fs.Write(getCoreMlModelResponse, 0, getCoreMlModelResponse.Length);
+                         fs.Close();
+                     }
+                 },
+                 classifierId: classifierId
+             );
+
+             while (getCoreMlModelResponse == null)
+                 yield return null;
+         }
+         #endregion
+
+         #region DeleteClassifier
+         //[UnityTest, Order(98)]
+         public IEnumerator TestDeleteClassifier()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to DeleteClassifier...");
+             bool isComplete = false;
+             service.DeleteClassifier(
+                 callback: (DetailedResponse<object> response, IBMError error) =>
+                 {
+                     Log.Debug("VisualRecognitionServiceV3IntegrationTests", "DeleteClassifier result: {0}", response.Response);
+                     Assert.IsTrue(response.StatusCode == 200);
+                     Assert.IsNull(error);
+                     isComplete = true;
+                 },
+                 classifierId: classifierId
+             );
+
+             while (!isComplete)
+                 yield return null;
+         }
+         #endregion
+
+         #region DeleteUserData
+         [UnityTest, Order(99)]
+         public IEnumerator TestDeleteUserData()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to DeleteUserData...");
+             object deleteUserDataResponse = null;
+             service.DeleteUserData(
+                 callback: (DetailedResponse<object> response, IBMError error) =>
+                 {
+                     Log.Debug("VisualRecognitionServiceV3IntegrationTests", "DeleteUserData result: {0}", response.Response);
+                     deleteUserDataResponse = response.Result;
+                     Assert.IsNotNull(deleteUserDataResponse);
+                     Assert.IsNull(error);
+                 },
+                 customerId: "customerId"
+             );
+
+             while (deleteUserDataResponse == null)
+                 yield return null;
+         }
+         #endregion
+
+         #region CheckClassifierStatus
+         private IEnumerator CheckClassifierStatus()
+         {
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to CheckClassifierStatus in 15 seconds...");
+             yield return new WaitForSeconds(15f);
+
+             Log.Debug("VisualRecognitionServiceV3IntegrationTests", "Attempting to GetClassifier...");
+             Classifier getClassifierResponse = null;
+             try
+             {
+                 service.GetClassifier(
+                     callback: (DetailedResponse<Classifier> response, IBMError error) =>
+                     {
+                         getClassifierResponse = response.Result;
+                         Log.Debug("VisualRecognitionServiceV3IntegrationTests", "CheckClassifierStatus: {0}", getClassifierResponse.Status);
+                         if (getClassifierResponse.Status == Classifier.StatusValue.READY || getClassifierResponse.Status == Classifier.StatusValue.FAILED)
+                         {
+                             isClassifierReady = true;
+                         }
+                         else
+                         {
+                             Runnable.Run(CheckClassifierStatus());
+                         }
+                     },
+                     classifierId: classifierId
+                 );
+             }
+             catch
+             {
+                 Runnable.Run(CheckClassifierStatus());
+             }
+
+             while (getClassifierResponse == null)
+                 yield return null;
+         }
+         #endregion
+     }
+ }
+ fileFormatVersion: 2
+ guid: 7e93f081cdcc9ed41a34fb3a723d7069
+ MonoImporter:
+   externalObjects: {}
+   serializedVersion: 2
+   defaultReferences: []
+   executionOrder: 0
+   icon: {instanceID: 0}
+   userData: 
+   assetBundleName: 
+   assetBundleVariant: 
+ fileFormatVersion: 2
+ guid: 1942de15e39b34bc8b5f8705c9b95a1a
+ MonoImporter:
+   externalObjects: {}
+   serializedVersion: 2
+   defaultReferences: []
+   executionOrder: 0
+   icon: {instanceID: 0}
+   userData: 
+   assetBundleName: 
+   assetBundleVariant: 
+
+
+ copyright:
+   years: 2015, 2019
+ lastupdated: "2019-12-18"
+   years: 2015, 2020
+ lastupdated: "2020-01-22"
+
+ keywords: performance options, attachments, filtered replication, replication scheduler, cancel replication, replication database maintenance, /_scheduler/docs endpoint, /_scheduler/docs/_replicator/$doc_id endpoint, /_scheduler/jobs endpoint, /_scheduler/jobs/$job_id endpoint
+
+ @@ -31,7 +31,7 @@ You can learn about advanced replication concepts and tasks, including maintaini
+ You might also find it helpful to review details of the underlying
+ [replication protocol](http://docs.couchdb.org/en/stable/replication/protocol.html){: new_window}{: external},
+ and review the [Advanced methods](/docs/services/Cloudant?topic=cloudant-advanced-api#advanced-api) material.
+ and review the [Advanced methods](/docs/Cloudant?topic=cloudant-advanced-api#advanced-api) material.
+ ## Replication database maintenance
+ {: #replication-database-maintenance}
+ @@ -44,7 +44,7 @@ when the replicator process is restarted by {{site.data.keyword.cloudantfull}} o
+ The main action that you can do to maintain a replication database is to remove old documents.
+ This action can be done by determining the age of documents,
+ and [deleting them](/docs/services/Cloudant?topic=cloudant-documents#delete-a-document) if they are no longer needed.
+ and [deleting them](/docs/Cloudant?topic=cloudant-documents#delete-a-document) if they are no longer needed.
+ ## The replication scheduler
+ {: #the-replication-scheduler}
+ @@ -64,12 +64,12 @@ and consists of seven distinct states:
+   The replication was added to the scheduler,
+   but is not yet initialized or scheduled to run.
+   The status occurs when a new or updated replication document is stored within
+   the [`_replicator` database](/docs/services/Cloudant?topic=cloudant-replication-api#the-_replicator-database). 
+   the [`_replicator` database](/docs/Cloudant?topic=cloudant-replication-api#the-_replicator-database). 
+ 2.  `error`:
+   The replication cannot be turned into a job.
+   This error might be caused in several different ways.
+   For example,
+   the replication must be [filtered](/docs/services/Cloudant?topic=cloudant-design-documents#filter-functions),
+   the replication must be [filtered](/docs/Cloudant?topic=cloudant-design-documents#filter-functions),
+   but it was not possible to fetch the filter code from the source database.
+ 3.  `pending`:
+   The replication job is scheduled to run,
+ @@ -81,7 +81,7 @@ and consists of seven distinct states:
+   The job is automatically retried later.
+ 6.  `completed`:
+   The replication job completed.
+   This state does not apply to [continuous replications](/docs/services/Cloudant?topic=cloudant-replication-api#continuous-replication).
+   This state does not apply to [continuous replications](/docs/Cloudant?topic=cloudant-replication-api#continuous-replication).
+ 7.  `failed`:
+   The replication job failed.
+   The failure is permanent.
+ @@ -102,8 +102,8 @@ You can manage and determine replication status more quickly and easily by using
+ See the typical process for using the replication scheduler to manage and monitor replications as follows:
+ 1.  Create a [replication document](/docs/services/Cloudant?topic=cloudant-replication-api#replication-document-format) that describes the needed replication,
+     and store the document in the [replicator database](/docs/services/Cloudant?topic=cloudant-replication-api#the-_replicator-database).
+ 1.  Create a [replication document](/docs/Cloudant?topic=cloudant-replication-api#replication-document-format) that describes the needed replication,
+     and store the document in the [replicator database](/docs/Cloudant?topic=cloudant-replication-api#the-_replicator-database).
+ 2.  Monitor the status of the replication by using the `/_scheduler/docs` endpoint.
+ ### The `/_scheduler/docs` endpoint
+ @@ -112,7 +112,7 @@ See the typical process for using the replication scheduler to manage and monito
+ The `/_scheduler/docs` endpoint provides a monitoring capability.
+ Use it to determine the status of a replication that is described by a replication document.
+ The status of a replication can be 1 of 7 possible states,
+ as described in [the replication scheduler](#the-replication-scheduler) section.
+ as described in the [replication scheduler](#the-replication-scheduler) section.
+ #### Query parameters for the `/_scheduler/docs` endpoint
+ {: #query-parameters-for-the-_scheduler-docs-endpoint}
+ @@ -176,7 +176,7 @@ The ID must be URL encoded.
+ {: #replication-status}
+ You can determine replication status by checking
+ the [replication scheduler](/docs/services/Cloudant?topic=cloudant-advanced-replication#the-replication-scheduler).
+ the [replication scheduler](/docs/Cloudant?topic=cloudant-advanced-replication#the-replication-scheduler).
+ The previous technique of checking replication status by inspecting the [replication document](#status-checking-by-using-the-replication-document) is still available.
+ {: note}
+ @@ -459,7 +459,7 @@ A continuous replication can never have a `completed` state.
+
+ In any production application, security of the source and target databases is essential.
+ In order for replication to proceed, authentication is necessary to access the databases.
+ In addition, checkpoints for replication are [enabled by default](/docs/services/Cloudant?topic=cloudant-replication-api#replication-document-format),
+ In addition, checkpoints for replication are [enabled by default](/docs/Cloudant?topic=cloudant-replication-api#replication-document-format),
+ which means that replicating the source database requires write access.
+
+ To enable authentication during replication,
+ @@ -485,7 +485,7 @@ include one or more filter functions in a design document on the source.
+ You can then tell the replicator to use these filter functions.
+
+ Filtering documents during replication is similar to the process of
+ [filtering the `_changes` feed](/docs/services/Cloudant?topic=cloudant-design-documents#filter-functions).
+ [filtering the `_changes` feed](/docs/Cloudant?topic=cloudant-design-documents#filter-functions).
+ {: tip}
+
+ A filter function takes two arguments:
+ @@ -497,7 +497,7 @@ A filter function returns a `true` or `false` value.
+ If the result is true,
+ the document is replicated.
+
+ To set up filtering, use the `selector` field whenever possible. When you use the `selector` field, you can specify a filter without having to replicate the entire database. This method makes filtering faster and causes less load on {{site.data.keyword.cloudant_short_notm}}. For more information, see the [`selector` field](/docs/services/Cloudant?topic=cloudant-replication-api&origin_team=T4NN71GAU#the-selector-field) documentation. 
+ To set up filtering, use the `selector` field whenever possible. When you use the `selector` field, you can specify a filter without having to replicate the entire database. This method makes filtering faster and causes less load on {{site.data.keyword.cloudant_short_notm}}. For more information, see the [`selector` field](/docs/Cloudant?topic=cloudant-replication-api&origin_team=T4NN71GAU#the-selector-field) documentation. 
+ {: note}
+
+ See the following example of a filter function:
+ @@ -557,7 +557,7 @@ See example JSON for starting a filtered replication with supplied parameters:
+ ```
+ {: codeblock}
+ The `selector` option provides performance benefits when compared with using the `filter` option. Use the `selector` option whenever possible. For more information, see the [`selector`](/docs/services/Cloudant?topic=cloudant-replication-api#the-selector-field){: new_window} documentation.
+ The `selector` option provides performance benefits when compared with using the `filter` option. Use the `selector` option whenever possible. For more information, see the [`selector`](/docs/Cloudant?topic=cloudant-replication-api#the-selector-field){: new_window} documentation.
+ {: note}
+
+ ## Named document replication
+ @@ -724,7 +724,7 @@ See the following example that includes performance options in a replication doc
+ Having large numbers of attachments on documents might cause an adverse effect on replication performance.
+
+ For more information about the effect of attachments on replication performance,
+ see [Performance considerations](/docs/services/Cloudant?topic=cloudant-attachments#performance-considerations).
+ see [Performance considerations](/docs/Cloudant?topic=cloudant-attachments#performance-considerations).
+
+ ## The `/_replicate` endpoint
+ {: #the-_replicate-endpoint}
+ @@ -755,8 +755,8 @@ and other options.
+ Except for the `cancel` field,
+ the fields in the JSON document that is supplied to the `_replicate` endpoint are identical to those fields in
+ a replication document that is stored in the [`_replicator` database](/docs/services/Cloudant?topic=cloudant-replication-api#the-_replicator-database).
+ The JSON document uses the [replication document format](/docs/services/Cloudant?topic=cloudant-replication-api#replication-document-format).
+ a replication document that is stored in the [`_replicator` database](/docs/Cloudant?topic=cloudant-replication-api#the-_replicator-database).
+ The JSON document uses the [replication document format](/docs/Cloudant?topic=cloudant-replication-api#replication-document-format).
+ The fields of the JSON request are as follows:
+ @@ -813,12 +813,12 @@ A replication that is triggered by `POST`ing to `/_replicate` can be canceled
+ by `POST`ing the exact same JSON object but with the additional `cancel` property set to `true`.
+ If a replication is canceled,
+ the request that initiated the replication fails with [error 500 (shutdown)](/docs/services/Cloudant?topic=cloudant-http#http-status-codes).
+ the request that initiated the replication fails with [error 500 (shutdown)](/docs/Cloudant?topic=cloudant-http#http-status-codes).
+ {: note}
+ The replication ID can be obtained from the original replication request if it is a continuous replication.
+ Alternatively,
+ the replication ID can be obtained from [`/_active_tasks`](/docs/services/Cloudant?topic=cloudant-active-tasks#active-tasks).
+ the replication ID can be obtained from [`/_active_tasks`](/docs/Cloudant?topic=cloudant-active-tasks#active-tasks).
+ See the following example that uses HTTP to cancel a replication:
+ This is a collection of sample Ansible playbooks that can be customized and used for quick ICP deployment on a on premises Nutanix cluster. Both x86 and ppc64le (Power) architectures are supported, and both Ubuntu and RHEL OSs are supported.
+
+ Supports ICP versions 3.x and above.
+
+ ### Prepare your Nutanix cluster:
+
+ There are 2 small steps you will need to do in order to prepare your Nutanix cluster for deployment:
+
+   - upload a cloud disk image from a supported OS (RHEL or Ubuntu)
+   - configure networking in the cluster
+
+ If you have already deployed a Nutanix cluster chances are the above tasks were already achieved. If not, you can simply login into the Nutanix PRISM UI and follow the proper procedures as described in their documentation:
+
+   - [Adding an image](https://portal.nutanix.com/#/page/docs/details?targetId=Prism-Central-Guide-Prism-v55:mul-image-add-pc-t.html)
+   - [Configuring a virtual network for user VM interfaces](https://portal.nutanix.com/#/page/docs/details?targetId=Web-Console-Guide-Prism-v55:wc-virtual-network-for-user-vm-vnics-configure-wc-t.html)
+
+ Once you're done take note of the image name and the network name you'd like to use to deploy your ICP cluster.
+
+ ### Configure your Nutanix cluster settings
+
+ You can find these in the first part of this [file](../nutanix/vars/nutanix.yml). It's a best practice to define different clusters to assume different roles, for example, a "prod" cluster that contains the production deployment and a "test" cluster that contains the test deployment. Each of these clusters have key parameters that will need to be configured:
+
+ | variable | example | description |
+ | ------ | ------ | ------ |
+ | address | 9.53.168.50 | The IP address of the Nutanix cluster |
+ | port | 9440 | The port number where the Nutanix API resides, usually 9440 |
+ | validate_certs | False | Wether to validate the Nutanix server certificate |
+ | username | admin | A valid user name to interact with the Nutanix cluster |
+ | password | passw0rd<sup>*</sup> | The password associated to the Nutanix user |
+
+ <sup>*</sup>Obs: It's a best practice to always encrypt any secrets before publishing it in an Ansible yml file. The ansible-vault command can be used for this purpose. To make it easier we provide a sample syntax [here](../nutanix/scripts/enc.sh). Use it as:
+ ```sh
+ cd nutanix
+ scripts/enc.sh <password_to_encrypt>
+ ```
+ And then copy the resullting encrypted string into the proper variable in your yml file.
+ ### Configure your Nutanix playbook settings
+ You can find these in the second part of this [file](../nutanix/vars/nutanix.yml). Here we define key Nutanix-related variables that will need to be configured:
+ | variable | example | description |
+ | ------ | ------ | ------ |
+ | do_debug (optional) | False | For debugging purposes, shows output from remote REST API calls and other debugging messages |
+ | do_verbose (optional) | False | Extra verbose debugging, usually for development purposes only |
+ | cluster | "{{ clusters.test }}" | Points to a Nutanix cluster to use for deployment (defined on previous section) |
+ | vms_root_password | passw0rd<sup>*</sup> | The password to set for the root user in the VMs to be used for ICP installation |
+ | vms | see [sample](../nutanix/vars/nutanix.yml) | List variable containing multiple Virtual Machine definitions |
+ | vgs (optional) | see [sample](../nutanix/vars/nutanix-sample.yml) | List variable containing multiple Volume Group definitions |
+ | map_vm_vg (optional) | see [sample](../nutanix/vars/nutanix-sample.yml) | List variable with entries attaching Volume Groups to Virtual Machines |
+
+ <sup>*</sup>Obs: See best practices for encryption of secrets as explained in the previous section.
+ Each element in the "vms" array corresponds to a VM that will be created in the Nutanix cluster. The following parameters can be set for each VM:
+ | parameter | example | description |
+ | ------ | ------ | ------ |
+ | type | sample | The role this VM will assume in the cluster, e.g. master, worker, proxy, etc. |
+ | name | a-sample-vm | The hostname to be set for this VM |
+ | mem | 32768 (32GB)| The amount of memory (in MB) to allocate for this VM |
+ | cpu | 1 | The number of vCPUs to allocate for this VM |
+ | cpc | 6 | The number of vCores per vCPU to allocate for this VM |
+ | net | br.0 | The name of the Nutanix network to use for this VM |
+ | boot | { img: "ubuntu-cloud-16.04-20180427", size: 128849018880 } | Dictionary with image name and size for the VM boot disk |
+ | clones (optional) | [ "empty_100gb", ... ] | List of image names to clone as disks for this VM |
+ | disks (optional) | [ 128849018880 ] | List of size in bytes for new disks to be created for this VM |
+ | user (optional) | ubuntu | The boot image's pre-configured user Id to use when connecting to it |
+ | body | vm-create.j2 | The default VM body template to use when creating the VM (includes cloud-init configuration) |
+ Each element in the "vgs" array corresponds to a VG that will be created in the Nutanix cluster. The following parameters can be set for each VG:
+ | parameter | example | description |
+ | ------ | ------ | ------ |
+ | name | a-sample-vm | The hostname to be set for this VM |
+ | container | default-container | The name of the storage container to use for this VG |
+ | shared | "true" | Use "true" if you want to share this VG among multiple VMs, "false" otherwise |
+ | clones (optional if disks is defined) | [ "empty_100gb", ... ] | List of image names to clone as disks for this VG |
+ | disks (optional if clones is defined) | [ 128849018880 ] | List of size in bytes for new disks to be created for this VG |
+ | body | vg-create.j2 | The default VG body template to use when creating the VG |
+ Finally, you can map VGs to VMs by defining a list in the map_vms_vgs variable. Each entry in the list is a VM-VG pair that associates a VM name to a VG name. If you want to map multiple VGs to a VM or vice-versa just define multiple entries. You can see an example of such list of mappings [here](../nutanix/vars/nutanix-sample.yml).
+ ### Configure your ICP installation settings
+ You can find the ICP installation parameters in this [file](../nutanix/vars/icp.yml). The following are key variables that will need to be configured for a successful ICP installation:
+ | variable | example | description |
+ | ------ | ------ | ------ |
+ | do_debug (optional) | False | For debugging purposes, shows output from commands and debugging messages |
+ | do_verbose (optional) | False | Extra verbose debugging, usually for development purposes only |
+ | icp_conf | /opt/icp | Location where the ICP inception installation configuration will reside |
+ | icp_image_x86<sup>*</sup> (mandatory if installing from or to x86 nodes) | /root/ibm-cloud-private-x86_64-3.1.1.tar.gz | Path of the ICP x86 image compressed tarball |
+ | icp_image_ppc<sup>*</sup> (mandatory if installing from or to Power nodes) | /root/ibm-cloud-private-ppc64le-3.1.1.tar.gz | Path of the ICP ppc64le image compressed tarball |
+ | icp_inception_version | 3.1.1-ee | Version of the container image to use for ICP inception (specify ee vs. ce for enterprise or community editions) |
+ | icp_target_arch | ppc64le | Architecture of target nodes... use "amd64" for x86, "ppc64le" for power |
+
+ <sup>*</sup>Obs: It is required that you download the proper ICP images for your platform(s) (either x86 or Power or both) from IBM Passport Advantage and place them in a locally accessible directory prior to running this playbook. The architecture of target nodes doesn't necessarily need to be the same as the installation node you're using. For example, one can run this playbook on a x86 node and install ICP to target Power nodes. The configuration however needs to point to both image architecture tarballs for this to work.
+ Once all these configuration parameters are set you're ready to initiate your deployment. During deployment the playbook will load the ICP images in the deployment node (system you're running this playbook from), create an ICP configuration pointing to the targets in the Nutanix cluster and then remotely install the ICP cluster in the target VMs.
+ ### Deployment steps
+ There are 4 steps necessary for deployment, that have to run in sequence:
+   - Nutanix [config](../nutanix/nx_config.yml) creates the VMs in the Nutanix cluster
+   - Nutanix [deploy](../nutanix/nx_deploy.yml) configures the VMs for deployment
+   - ICP [config](../nutanix/icp_config.yml) loads ICP images in the deployer and configures ICP deployment parameters
+   - ICP [deploy](../nutanix/icp_deploy.yml) installs ICP on the remote VM nodes
+ In addition there's 2 teardown steps in case you'd like to clean your environment:
+   - Nutanix [teardown](../nutanix/nx_teardown.yml) removes all previously created VMs in the Nutanix cluster
+   - ICP [teardown](../nutanix/icp_teardown.yml) removes the ICP images and configuration in the deployer
+ And for convenience there's also an [install](../nutanix/nx-icp-install.yml) step that runs all 4 main deployment steps in sequence and a respective [uninstall](../nutanix/nx-icp-install.yml) step that runs both teardown steps in sequence.
+ If you have encrypted secrets you will need to pass the file containing the vault secret to Ansible when running each of these playbooks. To make it easier we provide a sample syntax [here](../nutanix/scripts/run.sh). Use it as:
+ ```sh
+ cd nutanix
+ scripts/run.sh <deployment_step_name>
+ ```
+ ### Precaution when using RedHat Enterprise Linux images
+ To sucessfully use RHEL cloud images users must use the Nutanix [deploy](../nutanix/nx_deploy.yml) step to properly set up the RedHat subscription and register repositories for use with yum. If this step is not done the ICP deployment will fail. There are many ways to achieve this. As an example we use a sample role called "rhel" that makes use of certificate variables define [here](../nutanix/vars/redhat.yml). With these variables our sample tasks [here](../nutanix/roles/rhel/tasks/subscribe.yml) invoke subscription-manager commands to properly register the subscription and sets up repositories for use with yum. If your organization uses an alternate (or legacy) method to set up subscription and repositories please replace these tasks and variables accordingly.
+ ### What to expect during deployment
+ The full deployment end-to-end takes ~ 1:30h to complete (depending on the number of nodes) with the ICP installation step alone taking ~1:15h. Each of the long-running tasks (ICP load and ICP deploy) are executed asynchronously with a respective polling task is used to wait completion. These polling tasks will display a countdown of "FAILED" messages until the corresponding task it's monitoring completes - this is normal. Once the task completes the polling task should also complete successfully.
+ Upon playbook completion you can inspect the ICP installation logs in the location defined by the icp_conf variable, under the cluster/logs directory. If all went well you can then login to the ICP UI here: https://<ICP_MASTER_VM_IP_ADDRESS>:8443. The default user id and password is admin / admin.
+ Happy ICP deployment !
+ {
+   "usage": {
+     "text_units": 1,
+     "text_characters": 37,
+     "features": 1
+   },
+   "language": "en",
+   "emotion": {
+     "targets": [
+       {
+         "text": "apples",
+         "emotion": {
+           "sadness": 0.028574,
+           "joy": 0.859042,
+           "fear": 0.02752,
+           "disgust": 0.017519,
+           "anger": 0.012855
+         }
+       },
+       {
+         "text": "oranges",
+         "emotion": {
+           "sadness": 0.514253,
+           "joy": 0.078317,
+           "fear": 0.074223,
+           "disgust": 0.058103,
+           "anger": 0.126859
+         }
+       }
+     ],
+     "document": {
+       "emotion": {
+         "sadness": 0.32665,
+         "joy": 0.563273,
+         "fear": 0.033387,
+         "disgust": 0.022637,
+         "anger": 0.041796
+       }
+     }
+   }
+ }
+ # Active tasks
+ {: #active-tasks}
+ The `/_active_tasks` endpoint provides a list of the tasks that are running on the server. This list is often helpful when you're [monitoring](/docs/services/Cloudant?topic=cloudant-monitoring-an-ibm-cloudant-cluster#monitoring-an-ibm-cloudant-cluster) the performance of your system. 
+ The `/_active_tasks` endpoint provides a list of the tasks that are running on the server. This list is often helpful when you're [monitoring](/docs/Cloudant?topic=cloudant-monitoring-an-ibm-cloudant-cluster#monitoring-an-ibm-cloudant-cluster) the performance of your system. 
+ You can retrieve a list of active tasks, including compaction, replication, and indexing tasks. For more examples on using the `/_active_tasks` endpoint,
+ see the [Managing tasks](/docs/services/Cloudant?topic=cloudant-managing-tasks#managing-tasks) guide.
+ see the [Managing tasks](/docs/Cloudant?topic=cloudant-managing-tasks#managing-tasks) guide.
+ {: shortdesc}
+ ## Retrieving a list of active tasks
+
+ %%writefile lab/Projectile_range.cpp
+
+ //==============================================================
+ // Copyright © 2019 Intel Corporation
+ //
+ // SPDX-License-Identifier: MIT
+ // =============================================================
+
+ #include <vector>
+ #include<CL/sycl.hpp>
+ #include "Projectile.hpp"
+ using namespace cl::sycl;
+ using namespace std;
+
+ #define PI 3.1415
+ #define g 9.81
+ #define NITERATIONS 100
+
+ //Function to calculate the range, maximum height and total flight time of a projectile
+ inline void calculate_range(Projectile& obj,Projectile& pObj){
+
+     float nAngle = obj.getangle();
+     float nVel = obj.getvelocity();
+     //for trignometric functions use cl::sycl::sin/cos
+     float sinV = cl::sycl::sin (nAngle*PI/180);
+     float cosV = cl::sycl::cos (nAngle*PI/180);
+     float totalT = cl::sycl::fabs((2 *nVel * sinV))/g;    
+     float range_s = cl::sycl::fabs(nVel * totalT * cosV);
+     float max_height = (nVel * nVel * sinV * sinV)/2*g; // h = v^2 * sin^2theta/2g       
+
+     pObj.setRangeandTime(range_s,totalT,nAngle,nVel,max_height);
+ }
+
+
+ //Compare the results of the two output vectors from parallel and scalar. They should be equa
+ int Compare(std::vector<Projectile> &v1,std::vector<Projectile> &v2){
+     int retCode = 1;
+     for (int i = 0; i< NITERATIONS; i++)
+     {
+         if(v1[i] == v2[i])
+         {
+             continue;
+         }
+     else{
+             retCode = -1;
+             break;
+         }
+     }
+     return retCode;
+ }
+
+ //v1 and v2 are the vectors with N Projectile numbers and are inputs to the parallel function
+ void dpcpp_parallel(std::vector<Projectile> &v1,std::vector<Projectile> &v2)
+ {
+     try{
+         // Setting up a queue to default DPC++ device selected by runtime
+         queue device_queue;
+
+         buffer<Projectile, 1> bufv1(v1.data(),range<1>(NITERATIONS));
+         buffer<Projectile, 1> bufv2(v2.data(), range<1>(NITERATIONS));
+
+         //Submit Command group function object to the queue
+         device_queue.submit([&](handler& cgh) {         
+         //Input accessors set as read_write mode
+
+         //**************STEP 1: Uncomment the below to set the read_write Accessor********************
+         //auto acc_vect1 = bufv1.get_access<access::mode::read_write>(cgh);
+
+         //Output accessor set to write mode.
+
+         //**************STEP 2: Uncomment the below to set the write Accessor********************
+         //auto acc_vect2 = bufv2.get_access<access::mode::write>(cgh);
+
+         cgh.parallel_for<class projectIP>(range<1>(NITERATIONS), [=](id<1> i) {
+         // Call the Inline function calculate_range that computes the range, total time and max height
+
+         //**************STEP 3: Uncomment the below line to call the inline calculate_range function 
+                  //calculate_range(acc_vect1[i],acc_vect2[i]);            
+
+                 }); 
+         });
+         //device_queue.wait();
+         device_queue.wait_and_throw();
+         //Explicit synchronization by creating a host accessor
+         auto host_acc_c = bufv2.get_access<access::mode::read>();
+
+         }
+      catch (cl::sycl::exception e) {
+          std::cout << "SYCL exception caught: " << e.what() << std::endl;
+      }
+ }
+ //scalar function to calculate the range
+ void dpcpp_scalar(std::vector<Projectile> &v1,std::vector<Projectile> &v2){    
+     for(int i=0; i<NITERATIONS; i++)
+     {
+         calculate_range(v1[i],v2[i]);   
+     }
+ }
+ int main() {
+     srand(time(NULL));
+     float angle = 0;
+     float vel = 0;  
+     vector<Projectile> vecT1,vecT2,vecT3;   
+     //Initialize the Input and Output vectors
+     for(int i = 0; i< NITERATIONS; i++)
+     {   angle = rand() % 90 + 10;
+         vel = rand() % 400 + 10;
+         vecT1.push_back(Projectile(angle,vel,1.0,1.0,1.0));
+         vecT2.push_back(Projectile());
+         vecT3.push_back(Projectile());
+     }
+     //call the dpcpp_parallel with vecT1 as input and vecT2 as output
+     dpcpp_parallel(vecT1,vecT2);
+     //call the dpcpp_scalar with vecT1 as input and vecT3 as output
+     dpcpp_scalar(vecT1,vecT3);
+     for(int i =0;i<NITERATIONS; i++)
+     {
+         //Displaying the Scalar computation results. Uncomment to viee the results
+         //cout<<"Scalar "<<vecT3[i];
+     }    
+     for(int i =0; i<NITERATIONS; i++){
+         //Displaying the Parallel computation results.
+         cout<<"Parallel "<<vecT2[i];
+     }
+     //Compare the vectors of both the outputs of parallal and scalar functions
+     int retCode = Compare(vecT2,vecT3);
+     if(retCode == 1)
+     {
+         cout<<"********************************************Success..The Results are matched********************************************************"<<"\n";
+     }
+     else
+         cout<<"*********************************************Failed********************************************************"<<"\n";
+     return 0;
+ }
+ <?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|x64">
+       <Configuration>Debug</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|x64">
+       <Configuration>Release</Configuration>
+       <Platform>x64</Platform>
+     </ProjectConfiguration>
+   </ItemGroup>
+   <ItemGroup>
+     <Text Include="License.txt" />
+   </ItemGroup>
+   <ItemGroup>
+     <None Include="README.md" />
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="src\matrix_mul_dpcpp.cpp" />
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <VCProjectVersion>15.0</VCProjectVersion>
+     <ProjectGuid>{d41bafbf-46e8-4bf6-ac99-5a311221e7c5}</ProjectGuid>
+     <Keyword>Win32Proj</Keyword>
+     <RootNamespace>matrix_mul_dpcpp</RootNamespace>
+     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>oneAPI Data Parallel C++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>Intel(R) oneAPI DPC++ Compiler</PlatformToolset>
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Label="Shared">
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <LinkIncremental>true</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <LinkIncremental>false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>Disabled</Optimization>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+     <ClCompile>
+       <PrecompiledHeader>Use</PrecompiledHeader>
+       <WarningLevel>Level3</WarningLevel>
+       <Optimization>MaxSpeed</Optimization>
+       <FunctionLevelLinking>true</FunctionLevelLinking>
+       <IntrinsicFunctions>true</IntrinsicFunctions>
+       <SDLCheck>true</SDLCheck>
+       <ConformanceMode>true</ConformanceMode>
+       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+       <SYCLWarningLevel>DisableAllWarnings</SYCLWarningLevel>
+     </ClCompile>
+     <Link>
+       <SubSystem>Console</SubSystem>
+       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+       <OptimizeReferences>true</OptimizeReferences>
+       <GenerateDebugInformation>true</GenerateDebugInformation>
+     </Link>
+   </ItemDefinitionGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+   <ImportGroup Label="ExtensionTargets">
+   </ImportGroup>
+ </Project>
+ The authenticity of host 'devcloud' (<no hostip for proxy command>)' can't be established.
+ ECDSA key fingerprint is SHA256:...
+ Are you sure you want to continue connecting (yes/no)? yes
+ Warning: Permanently added 'devcloud' (ECDSA) to the list of known hosts.
+ # We are in!
+ Host devcloud
+ User u35651
+ Port 4022
+ IdentityFile ~/.ssh/devcloud-access-key-35651.txt
+ ProxyCommand ssh -T devcloud-via-proxy
+
+ Host devcloud-via-proxy
+ User guest
+ Hostname devcloud.intel.com
+ IdentityFile ~/.ssh/devcloud-access-key-35651.txt
+ LocalForward 4022 c009:22
+ ProxyCommand nc -x <proxy_name>:<port> %h %p
+  make clean
+  exit
